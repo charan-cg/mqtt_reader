@@ -14,12 +14,13 @@ This document outlines the steps to create an MQTT system using Docker container
 Create a user-defined bridge network to allow communication between Docker containers.
 ```bash
 docker network create mqtt_network
+```
 
 ## Step 2: Run the Mosquitto Broker in Docker
 Start the Mosquitto broker in a Docker container on the created network.
 ```bash
 docker run -it --network mqtt_network -p 1883:1883 -v D:\livello\mqtt_reader\mosquitto.conf:/mosquitto/config/mosquitto.conf --name mosquitto eclipse-mosquitto
-
+```
 ## Step 3: Create the Python Script
 Create a Python script named mqtt_reader.py that will
 act as both the publisher and subscriber.
@@ -34,20 +35,20 @@ necessary libraries:
 
 ```text
 gmqtt
-
+```
 ## Step 6: Build the Docker Image for the Python Script
 In the directory containing the Dockerfile, run the following 
 command to build the Docker image:
 
 ```bash
 docker build -t mqtt_reader .
-
+```
 ## Step 7: Run the Python Script in Docker
 Run the Python script in a Docker container on the same 
 network as the Mosquitto broker:
 ```bash
 docker run -it --network mqtt_network mqtt_reader
-
+```
 ## Step 8: Verify the Setup
 1.Check Logs: Monitor the logs of both the Mosquitto
 broker and the Python script to ensure that 
